@@ -42,7 +42,7 @@ func! Md2Htm()
     let dir=SafeMakeDir(g:htmdir)
     let cmd="pandoc -s --mathjax --wrap=preserve --columns=80 --toc "
     let cmd.="-f markdown+tex_math_dollars -t html  --track-changes=accept "
-    let cmd.=expand("%"). " -o " . expand("%:r").".html"
+    let cmd.=expand("%"). " -o " .dir. expand("%:r").".html"
 
     return job_start(cmd, {'callback': 'Handler'})
     "return job_start(cmd)
@@ -76,11 +76,11 @@ function! vimpan#mainfunc()
 endfunc
 
 if !exists('g:imgdir')
-    let g:imgdir = 'imgs'
+    let g:imgdir = '..\img'
 endif
 if !exists('g:docdir')
-    let g:docdir = 'docx'
+    let g:docdir = '..\doc'
 endif
 if !exists('g:htmdir')
-    let g:htmdir = 'html'
+    let g:htmdir = '..\htm'
 endif

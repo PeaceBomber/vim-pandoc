@@ -53,7 +53,7 @@ func! vimpan#Md2Htm()
     endif
    
     "let cmd.="--resource-path=".g:datdir." "
-    let cmd.="-t html ".expand("%"). " -o " expand("%:r").".html"
+    let cmd.="-t html ".expand("%"). " -o ". expand("%:r").".html"
 
     "echom cmd
     return job_start(cmd, {'callback': 'Handler'})

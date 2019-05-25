@@ -31,7 +31,7 @@ endfunction
 func! vimpan#Md2Doc()
     let dir=SafeMakeDir(g:outdir)
     let cmd ="pandoc -s --mathjax --wrap=preserve --columns=80 "
-    let cmd.="-f markdown+east_asian_line_breaks "
+    let cmd.="-f markdown+east_asian_line_breaks+pipe_tables "
     let cmd.="--data-dir=".g:datdir." "
     if filereadable(g:datdir."reference.docx")
         let cmd.="--reference-doc=".g:datdir."reference.docx "
@@ -46,7 +46,7 @@ endfunc
 func! vimpan#Md2Htm()
     let dir=SafeMakeDir(g:outdir)
     let cmd="pandoc -s --mathjax --wrap=preserve --columns=80 --toc "
-    let cmd.="-f markdown+east_asian_line_breaks --quiet "
+    let cmd.="-f markdown+east_asian_line_breaks+pipe_tables "
     let cmd.="--data-dir=".g:datdir." "
     if filereadable(g:datdir."reference.css")
         let cmd.="--css=".g:datdir."reference.css "
@@ -104,9 +104,9 @@ if !exists('g:datdir')
 endif
 
 if !exists('g:imgdir')
-    let g:imgdir = './img'
+    let g:imgdir = 'img'
 endif
 if !exists('g:outdir')
-    let g:outdir = './out'
+    let g:outdir = 'docx'
 endif
 

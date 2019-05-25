@@ -95,8 +95,6 @@ func! vimpan#Main() abort
             \ 'sort' : 0
             \ }
 
-    command -nargs=1 Re call vimpan#RenameFile(<q-args>)
-    command -nargs=0 De call vimpan#DeleteFile()
 endfunc
 
 if !exists('g:datdir')

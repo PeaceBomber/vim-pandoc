@@ -82,7 +82,7 @@ function! vimpan#AutoGen()
     call vimpan#Md2Htm()
 endfunc
 
-func! vimpan#Main()
+func! vimpan#Main() abort
 
     call vimpan#MdIab()
 

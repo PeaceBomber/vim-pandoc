@@ -36,6 +36,11 @@ func! vimpan#Md2Doc()
     if filereadable(g:datdir."reference.docx")
         let cmd.="--reference-doc=".g:datdir."reference.docx "
     endif
+
+    if filereadable(expand("%:r").".bib")
+        let cmd.="--filter pandoc-citeproc --bibliography=".expand("%:r").".bib "
+    endif
+   
     let cmd.="-t docx ".expand("%"). " -o " .dir. expand("%:r").".docx"
 
     "echom cmd
@@ -50,6 +55,10 @@ func! vimpan#Md2Htm()
     let cmd.="--data-dir=".g:datdir." "
     if filereadable(g:datdir."reference.css")
         let cmd.="--css=".g:datdir."reference.css "
+    endif
+
+    if filereadable(expand("%:r").".bib")
+        let cmd.="--filter pandoc-citeproc --bibliography=".expand("%:r").".bib "
     endif
    
     "let cmd.="--resource-path=".g:datdir." "
@@ -107,4 +116,5 @@ endif
 if !exists('g:outdir')
     let g:outdir = 'docx'
 endif
+
 

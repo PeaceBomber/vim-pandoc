@@ -50,7 +50,7 @@ endfunc
 
 func! vimpan#Md2Htm()
     let dir=SafeMakeDir(g:outdir)
-    let cmd="pandoc -s --mathjax --wrap=preserve --columns=80 --toc "
+    let cmd="pandoc -s --mathml --wrap=preserve --columns=80 --toc "
     let cmd.="-f markdown+east_asian_line_breaks+pipe_tables "
     let cmd.="--data-dir=".g:datdir." "
     if filereadable(g:datdir."reference.css")
@@ -74,12 +74,14 @@ func! vimpan#PrvHtm()
     if has('win32')
         let cmd=""
         let cmd.=expand("%:r").".html"
-    elseif has('linux')
-        let cmd ="firefox --new-window"
-        let cmd.=expand("%:r").".html"."2> /dev/null"
+    elseif has('unix')
+        let cmd ="firefox  --new-window "
+        let cmd.=expand("%:r").".html"
     elseif has('macos')
         
     endif
+
+    echom cmd
 
     return job_start(cmd, {'callback': 'Handler'})
 endfunc

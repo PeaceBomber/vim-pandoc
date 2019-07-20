@@ -114,7 +114,7 @@ if !exists('g:imgdir')
     let g:imgdir = 'img'
 endif
 if !exists('g:outdir')
-    let g:outdir = 'docx'
+    let g:outdir = ''
 endif
 
 

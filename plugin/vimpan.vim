@@ -69,7 +69,7 @@ func! vimpan#Md2Htm()
     "return job_start(cmd)
 endfunc 
 
-func! PrvHtm()
+func! vimpan#PrvHtm()
     " TODO 
     if has('win32')
         let cmd=""

@@ -32,7 +32,7 @@ func! vimpan#Md2Doc()
     let dir=SafeMakeDir(g:outdir)
     let cmd ="pandoc -s --mathjax --wrap=preserve --columns=80 "
     let cmd.="-f markdown+east_asian_line_breaks+pipe_tables "
-    let cmd.="--data-dir=".g:datdir." "
+    let cmd.="--data-dir=".g:datdir." -F pandoc-crossref "
     if filereadable(g:datdir."reference.docx")
         let cmd.="--reference-doc=".g:datdir."reference.docx "
     endif
@@ -50,9 +50,9 @@ endfunc
 
 func! vimpan#Md2Htm()
     let dir=SafeMakeDir(g:outdir)
-    let cmd="pandoc -s --mathjax --wrap=preserve --columns=80 --toc "
+    let cmd="pandoc -s --mathml --wrap=preserve --columns=80 --toc "
     let cmd.="-f markdown+east_asian_line_breaks+pipe_tables "
-    let cmd.="--data-dir=".g:datdir." "
+    let cmd.="--data-dir=".g:datdir." -F pandoc-crossref "
     if filereadable(g:datdir."reference.css")
         let cmd.="--css=".g:datdir."reference.css "
     endif
@@ -69,17 +69,19 @@ func! vimpan#Md2Htm()
     "return job_start(cmd)
 endfunc 
 
-func! PrvHtm()
+func! vimpan#PrvHtm()
     " TODO 
     if has('win32')
         let cmd=""
         let cmd.=expand("%:r").".html"
-    elseif has('linux')
-        let cmd ="firefox --new-window"
-        let cmd.=expand("%:r").".html"."2> /dev/null"
+    elseif has('unix')
+        let cmd ="firefox  --new-window "
+        let cmd.=expand("%:r").".html"
     elseif has('macos')
         
     endif
+
+    echom cmd
 
     return job_start(cmd, {'callback': 'Handler'})
 endfunc
@@ -114,7 +116,7 @@ if !exists('g:imgdir')
     let g:imgdir = 'img'
 endif
 if !exists('g:outdir')
-    let g:outdir = 'docx'
+    let g:outdir = ''
 endif
 
 

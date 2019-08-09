@@ -39,6 +39,8 @@ func! vimpan#Md2Doc()
 
     if filereadable(expand("%:r").".bib")
         let cmd.="--filter pandoc-citeproc --bibliography=".expand("%:r").".bib "
+    elseif filereadable("ref.bib")
+        let cmd.="--filter pandoc-citeproc --bibliography=ref.bib "
     endif
    
     let cmd.="-t docx ".expand("%"). " -o " .dir. expand("%:r").".docx"
@@ -59,6 +61,8 @@ func! vimpan#Md2Htm()
 
     if filereadable(expand("%:r").".bib")
         let cmd.="--filter pandoc-citeproc --bibliography=".expand("%:r").".bib "
+    elseif filereadable("ref.bib")
+        let cmd.="--filter pandoc-citeproc --bibliography=ref.bib "
     endif
    
     "let cmd.="--resource-path=".g:datdir." "

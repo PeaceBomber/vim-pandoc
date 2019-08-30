@@ -55,8 +55,10 @@ func! vimpan#Md2Htm()
     let cmd="pandoc -s --mathml --wrap=preserve --columns=80 --toc "
     let cmd.="-f markdown+east_asian_line_breaks+pipe_tables "
     let cmd.="--data-dir=".g:datdir." "
-    if filereadable(g:datdir."reference.css")
-        let cmd.="--css=".g:datdir."reference.css "
+    if filereadable(expand("%:r").".css")
+        let cmd.="--css=".expand("%:r").".css "
+    elseif filereadable("ref.css")
+        let cmd.="--css=ref.css "
     endif
 
     if filereadable(expand("%:r").".bib")
